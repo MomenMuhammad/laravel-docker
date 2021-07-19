@@ -1,0 +1,14 @@
+.env
+.idea
+docker/config/apache2/
+docker/config/conf.d/
+docker/log/apache2/
+docker/log/elasticsearch/
+docker/log/mysql/
+docker/log/redis/
+!docker/config/apache2/example.test.conf
+!docker/config/conf.d/.gitkep
+!docker/log/apache2/.gitkep
+!docker/log/elasticsearch/.gitkeep
+!docker/log/mysql/.gitkeep
+!docker/log/redis/.gitkeep

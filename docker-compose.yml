@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  application:
+    build: docker/bin/application
+    container_name: ${APPLICATION_CONTAINER_NAME}
+    ports:
+      - "${APPLICATION_EXTERNAL_HTTP_PORT}:${APPLICATION_INTERNAL_HTTP_PORT}"
+      - "${APPLICATION_EXTERNAL_HTTPS_PORT}:${APPLICATION_INTERNAL_HTTPS_PORT}"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/config/apache2:/etc/apache2/sites-enabled
+      - ./docker/config/ssl/ssl-cert.key:/etc/ssl/private/ssl-cert.key
+      - ./docker/config/ssl/ssl-cert.crt:/etc/ssl/certs/ssl-cert.crt
+      - ./docker/config/conf.d/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/logs/apache2:/var/log/apache2
+    networks:
+      mynetwork : {}
+  mysql:
+    build: docker/bin/mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
+    ports:
+      - "${MYSQL_EXTERNAL_PORT}:${MYSQL_INTERNAL_PORT}"
+    volumes:
+      - ${MYSQL_DATABASE_FILES_PATH}:/var/lib/mysql
+      - ${MYSQL_DATABASE_PATH}/:/docker-entrypoint-initdb.d
+      - ./docker/config/mysql/:/etc/mysql/conf.d
+      - ./docker/logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      mynetwork : {}
+  elasticsearch:
+    build: docker/bin/elasticsearch
+    container_name: ${ELASTICSEARCH_CONTAINER_NAME}
+    ports:
+      - "${ELASTICSEARCH_EXTERNAL_REQUEST_PORT}:${ELASTICSEARCH_INTERNAL_REQUEST_PORT}"
+      - "${ELASTICSEARCH_EXTERNAL_COMMUNICATION_PORT}:${ELASTICSEARCH_INTERNAL_COMMUNICATION_PORT}"
+    volumes:
+      - ./docker/logs/elasticsearch:/usr/share/elasticsearch/logs 
+    environment:
+      - discovery.type=single-node
+    networks:
+      mynetwork : {}
+  redis:
+    build: docker/bin/redis
+    container_name: ${REDIS_CONTAINER_NAME}
+    ports:
+      - "${REDIS_EXTERNAL_REDIS_PORT}:${REDIS_INTERNAL_REDIS_PORT}"
+    networks:
+      mynetwork : {}
+networks:
+  mynetwork:
+    name: ${NETWORK_NAME}
