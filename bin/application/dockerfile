@@ -7,7 +7,7 @@ RUN apt-get -y update --fix-missing --no-install-recommends
 RUN apt-get -y upgrade
 
 # Install useful tools and packages
-RUN apt-get -yq install nano wget dialog libonig-dev openssl libxml2-dev
+RUN apt-get -yq install nano wget dialog libonig-dev openssl libxml2-dev composer
 
 # Install Laravel Dependencies
 RUN docker-php-ext-install bcmath 
