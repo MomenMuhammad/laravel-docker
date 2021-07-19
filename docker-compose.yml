@@ -8,7 +8,7 @@ services:
       - "${APPLICATION_EXTERNAL_HTTP_PORT}:${APPLICATION_INTERNAL_HTTP_PORT}"
       - "${APPLICATION_EXTERNAL_HTTPS_PORT}:${APPLICATION_INTERNAL_HTTPS_PORT}"
     volumes:
-      - ./:/var/www/html
+      - ./../:/var/www/html
       - ./docker/config/apache2:/etc/apache2/sites-enabled
       - ./docker/config/ssl/ssl-cert.key:/etc/ssl/private/ssl-cert.key
       - ./docker/config/ssl/ssl-cert.crt:/etc/ssl/certs/ssl-cert.crt
