@@ -9,11 +9,11 @@ services:
       - "${APPLICATION_EXTERNAL_HTTPS_PORT}:${APPLICATION_INTERNAL_HTTPS_PORT}"
     volumes:
       - ./../:/var/www/html
-      - ./docker/config/apache2:/etc/apache2/sites-enabled
-      - ./docker/config/ssl/ssl-cert.key:/etc/ssl/private/ssl-cert.key
-      - ./docker/config/ssl/ssl-cert.crt:/etc/ssl/certs/ssl-cert.crt
-      - ./docker/config/conf.d/php.ini:/usr/local/etc/php/php.ini
-      - ./docker/logs/apache2:/var/log/apache2
+      - ./config/apache2:/etc/apache2/sites-enabled
+      - ./config/ssl/ssl-cert.key:/etc/ssl/private/ssl-cert.key
+      - ./config/ssl/ssl-cert.crt:/etc/ssl/certs/ssl-cert.crt
+      - ./config/conf.d/php.ini:/usr/local/etc/php/php.ini
+      - ./logs/apache2:/var/log/apache2
     networks:
       mynetwork : {}
   mysql:
@@ -24,8 +24,8 @@ services:
     volumes:
       - ${MYSQL_DATABASE_FILES_PATH}:/var/lib/mysql
       - ${MYSQL_DATABASE_PATH}/:/docker-entrypoint-initdb.d
-      - ./docker/config/mysql/:/etc/mysql/conf.d
-      - ./docker/logs/mysql:/var/log/mysql
+      - ./config/mysql/:/etc/mysql/conf.d
+      - ./logs/mysql:/var/log/mysql
     environment:
       MYSQL_USER: ${MYSQL_USERNAME}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
@@ -40,7 +40,7 @@ services:
       - "${ELASTICSEARCH_EXTERNAL_REQUEST_PORT}:${ELASTICSEARCH_INTERNAL_REQUEST_PORT}"
       - "${ELASTICSEARCH_EXTERNAL_COMMUNICATION_PORT}:${ELASTICSEARCH_INTERNAL_COMMUNICATION_PORT}"
     volumes:
-      - ./docker/logs/elasticsearch:/usr/share/elasticsearch/logs 
+      - ./logs/elasticsearch:/usr/share/elasticsearch/logs 
     environment:
       - discovery.type=single-node
     networks:
