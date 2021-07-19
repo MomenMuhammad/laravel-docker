@@ -7,9 +7,9 @@ RUN apt-get -y update --fix-missing --no-install-recommends
 RUN apt-get -y upgrade
 
 # Install useful tools and packages
-RUN apt-get -yq install nano wget dialog libonig-dev openssl libxml2-dev composer
+RUN apt-get -yq install nano wget dialog libonig-dev openssl libxml2-dev curl git unzip
 
-# Install Laravel Dependencies
+# Install Laravel Dependencies 
 RUN docker-php-ext-install bcmath 
 RUN docker-php-ext-install ctype 
 RUN docker-php-ext-install fileinfo
@@ -19,3 +19,6 @@ RUN docker-php-ext-install tokenizer
 RUN docker-php-ext-install xml
 
 RUN a2enmod ssl
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
