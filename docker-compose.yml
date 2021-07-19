@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   application:
-    build: docker/bin/application
+    build: bin/application
     container_name: ${APPLICATION_CONTAINER_NAME}
     ports:
       - "${APPLICATION_EXTERNAL_HTTP_PORT}:${APPLICATION_INTERNAL_HTTP_PORT}"
@@ -17,7 +17,7 @@ services:
     networks:
       mynetwork : {}
   mysql:
-    build: docker/bin/mysql
+    build: bin/mysql
     container_name: ${MYSQL_CONTAINER_NAME}
     ports:
       - "${MYSQL_EXTERNAL_PORT}:${MYSQL_INTERNAL_PORT}"
@@ -34,7 +34,7 @@ services:
     networks:
       mynetwork : {}
   elasticsearch:
-    build: docker/bin/elasticsearch
+    build: bin/elasticsearch
     container_name: ${ELASTICSEARCH_CONTAINER_NAME}
     ports:
       - "${ELASTICSEARCH_EXTERNAL_REQUEST_PORT}:${ELASTICSEARCH_INTERNAL_REQUEST_PORT}"
@@ -46,7 +46,7 @@ services:
     networks:
       mynetwork : {}
   redis:
-    build: docker/bin/redis
+    build: bin/redis
     container_name: ${REDIS_CONTAINER_NAME}
     ports:
       - "${REDIS_EXTERNAL_REDIS_PORT}:${REDIS_INTERNAL_REDIS_PORT}"
