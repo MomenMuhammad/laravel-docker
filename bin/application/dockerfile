@@ -8,17 +8,18 @@ RUN apt-get -y upgrade
 
 # Install useful tools and packages
 RUN apt-get -yq install nano wget dialog libonig-dev openssl libxml2-dev curl git unzip
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
+RUN apt-get -yq install nodejs
+
 
 # Install Laravel Dependencies 
-RUN docker-php-ext-install bcmath 
-RUN docker-php-ext-install ctype 
-RUN docker-php-ext-install fileinfo
-RUN docker-php-ext-install mbstring 
-RUN docker-php-ext-install pdo 
-RUN docker-php-ext-install tokenizer 
-RUN docker-php-ext-install xml
+RUN docker-php-ext-install bcmath ctype fileinfo mbstring pdo tokenizer xml
+RUN pecl update channel
+RUN pecl install -o -f redis
+RUN docker-php-ext-enable redis
 
 RUN a2enmod ssl
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN npm install --global yarn
