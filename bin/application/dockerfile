@@ -13,12 +13,12 @@ RUN apt-get -yq install nodejs
 
 
 # Install Laravel Dependencies 
-RUN docker-php-ext-install bcmath ctype fileinfo mbstring pdo tokenizer xml
+RUN docker-php-ext-install bcmath ctype fileinfo mbstring pdo pdo_mysql  tokenizer xml
 RUN pecl update channel
 RUN pecl install -o -f redis
 RUN docker-php-ext-enable redis
 
-RUN a2enmod ssl
+RUN a2enmod ssl rewrite 
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
