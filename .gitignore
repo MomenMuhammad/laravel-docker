@@ -6,7 +6,7 @@ logs/apache2/*
 logs/elasticsearch/*
 logs/mysql/*
 logs/redis/*
-!config/apache2/example.test.conf
+!config/apache2/default.conf
 !config/conf.d/.gitkep
 !log/apache2/example.test.conf
 !log/elasticsearch/.gitkeep
