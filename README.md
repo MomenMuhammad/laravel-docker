@@ -1,7 +1,6 @@
 ![Issues](https://img.shields.io/github/issues/MomenMuhammad/laravel-docker)
 ![Issues](https://img.shields.io/github/forks/MomenMuhammad/laravel-docker)
 ![Issues](https://img.shields.io/github/stars/MomenMuhammad/laravel-docker)
-![Issues](https://img.shields.io/github/license/MomenMuhammad/laravel-docker)
 # Basic Docker Environment For Laravel
 Basic Docker Configuration for laravel project
 # Steps
