@@ -22,8 +22,8 @@ services:
     ports:
       - "${MYSQL_EXTERNAL_PORT}:${MYSQL_INTERNAL_PORT}"
     volumes:
-      - ${MYSQL_DATABASE_FILES_PATH}:/var/lib/mysql
-      - ${MYSQL_DATABASE_PATH}/:/docker-entrypoint-initdb.d
+      - ${MYSQL_DATABASE_FILES_PATH:-/dev/null}:/var/lib/mysql
+      - ${MYSQL_DATABASE_PATH:-/dev/null}:/docker-entrypoint-initdb.d
       - ./config/mysql/:/etc/mysql/conf.d
       - ./logs/mysql:/var/log/mysql
     environment:
