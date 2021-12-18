@@ -9,4 +9,4 @@ Basic Docker Configuration for laravel project
 3. Go to the submodule folder ``` cd docker ```
 4. create new .env file by copying the .env.example ```cp .env.exmpale .env```
 5. edit the .env as you like
-6. run ```commandline docker-compose up -d```
+6. run ```docker-compose up -d```
